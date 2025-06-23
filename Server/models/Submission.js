@@ -1,12 +1,11 @@
-// /server/models/Submission.js
-import mongoose from 'mongoose';
+const mongoose = require("mongoose");
 
 const submissionSchema = new mongoose.Schema({
-  projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Project', required: true },
-  designer: { type: String, required: true }, // Designer's name
+  projectId: { type: mongoose.Schema.Types.ObjectId, ref: "Project" },
+  submittedBy: String,
+  status: { type: String, enum: ["Submitted", "Pending", "Delayed"] },
   date: { type: Date, default: Date.now },
-  remarks: { type: String },
-  type: { type: String, enum: ['CAD', 'Label'], required: true },
+  remarks: String,
 });
 
-export default mongoose.model('Submission', submissionSchema);
+module.exports = mongoose.model("Submission", submissionSchema);
